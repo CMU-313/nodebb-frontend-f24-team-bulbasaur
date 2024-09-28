@@ -1,6 +1,19 @@
 <ul component="category" class="topics-list list-unstyled" itemscope itemtype="http://www.schema.org/ItemList" data-nextstart="{nextStart}" data-set="{set}">
 
 	{{{ each topics }}}
+	<div class = 'd-flex '>
+			<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
+				{{{ if ./solved}}}
+					<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
+						<span > Solved </span>
+					</div>
+				{{{ else }}}
+					<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
+						<span>Unsolved</span>
+					</div>
+				{{{	end }}}
+			</div>
+	</div>
 	<li component="category/topic" class="category-item hover-parent border-bottom py-3 py-lg-4 d-flex flex-column flex-lg-row align-items-start {function.generateTopicClass}" <!-- IMPORT partials/data/category.tpl -->>
 		<link itemprop="url" content="{config.relative_path}/topic/{./slug}" />
 		<meta itemprop="name" content="{function.stripTags, ./title}" />
@@ -8,8 +21,10 @@
 		<meta itemprop="position" content="{increment(./index, "1")}" />
 		<a id="{./index}" data-index="{./index}" component="topic/anchor"></a>
 
-		<div class="d-flex p-0 col-12 col-lg-7 gap-2 gap-lg-3 pe-1 align-items-start {{{ if config.theme.mobileTopicTeasers }}}mb-2 mb-lg-0{{{ end }}}">
-			<div class="flex-shrink-0 position-relative">
+		
+		<div class="d-flex p-0 col-12 col-lg-7 gap-2 gap-lg-3 pe-1 align-items-start align-items-center {{{ if config.theme.mobileTopicTeasers }}}mb-2 mb-lg-0{{{ end }}}">
+
+			<div class="d-flex align-items-stretch flex-row justify-content-center align-self-start flex-shrink-0 position-relative">
 				<a class="text-decoration-none" href="{{{ if ./user.userslug }}}{config.relative_path}/user/{./user.userslug}{{{ else }}}#{{{ end }}}">
 					{buildAvatar(./user, "40px", true, "avatar avatar-tooltip")}
 				</a>
@@ -80,7 +95,7 @@
 				</div>
 				{{{ end }}}
 			</div>
-			
+
 			{{{ if ./thumbs.length }}}
 			<a class="topic-thumbs position-relative text-decoration-none flex-shrink-0 d-none d-xl-block" href="{config.relative_path}/topic/{./slug}{{{ if ./bookmark }}}/{./bookmark}{{{ end }}}" aria-label="[[topic:thumb-image]]">
 				<img class="topic-thumb rounded-1 bg-light" style="width:auto;max-width: 5.33rem;height: 3.33rem;object-fit: contain;" src="{./thumbs.0.url}" alt=""/>
@@ -88,10 +103,10 @@
 			</a>
 			{{{ end }}}
 		</div>
-
-		<div class="d-flex p-0 col-lg-5 col-12 align-content-stretch">
+		<div class="d-flex p-0 col-lg-5 col-12 align-items-stretch">
 			<div class="meta stats d-none d-lg-grid col-6 gap-1 pe-2 text-muted" style="grid-template-columns: 1fr 1fr 1fr;">
 				{{{ if !reputation:disabled }}}
+				
 				<div class="stats-votes card card-header border-0 p-2 overflow-hidden rounded-1 d-flex flex-column align-items-center">
 					<span class="fs-5 ff-secondary lh-1" title="{./votes}">{humanReadableNumber(./votes, 0)}</span>
 					<span class="d-none d-xl-flex text-lowercase text-xs">[[global:votes]]</span>
