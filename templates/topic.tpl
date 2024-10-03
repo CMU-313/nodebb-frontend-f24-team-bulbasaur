@@ -23,21 +23,26 @@
 
 	<div class="d-flex flex-column gap-3">
 		<div class="d-flex flex-wrap">
-			<div class="d-flex flex-column gap-3 flex-grow-1 gap-3">
-			<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
-				{{{ if ./solved}}}
-					<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
-						<span > Solved </span>
-					</div>
-				{{{ else }}}
-					<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
-						<span>Unsolved</span>
-					</div>
-				{{{	end }}}
-
+			<div class="d-flex flex-column gap-3 flex-grow-1 gap-3 ">
+			
+			<div class = "d-flex justify-content-between">
 				<h1 component="post/header" class="d-flex align-items-end tracking-tight fw-semibold fs-3 mb-0 text-break {{{ if config.theme.centerHeaderElements }}}text-center{{{ end }}}">
 					<span class="topic-title" component="topic/title">{title}</span>
 				</h1>
+				<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
+					
+					{{{ if ./solved}}}
+						<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
+							<span > Solved </span>
+						</div>
+					{{{ else }}}
+						<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
+							<span>Unsolved</span>
+						</div>
+					{{{	end }}}
+
+				</div>
+				
 			</div>
 				
 

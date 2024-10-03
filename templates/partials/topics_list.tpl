@@ -1,20 +1,9 @@
 <ul component="category" class="topics-list list-unstyled" itemscope itemtype="http://www.schema.org/ItemList" data-nextstart="{nextStart}" data-set="{set}">
 
 	{{{ each topics }}}
-	<div class = 'd-flex '>
-			<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
-				{{{ if ./solved}}}
-					<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
-						<span > Solved </span>
-					</div>
-				{{{ else }}}
-					<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
-						<span>Unsolved</span>
-					</div>
-				{{{	end }}}
-			</div>
-	</div>
+
 	<li component="category/topic" class="category-item hover-parent border-bottom py-3 py-lg-4 d-flex flex-column flex-lg-row align-items-start {function.generateTopicClass}" <!-- IMPORT partials/data/category.tpl -->>
+		
 		<link itemprop="url" content="{config.relative_path}/topic/{./slug}" />
 		<meta itemprop="name" content="{function.stripTags, ./title}" />
 		<meta itemprop="itemListOrder" content="descending" />
@@ -38,6 +27,7 @@
 				<h3 component="topic/header" class="title text-break fs-5 fw-semibold m-0 tracking-tight w-100 {{{ if showSelect }}}me-4 me-lg-0{{{ end }}}">
 					<a class="text-reset" href="{{{ if topics.noAnchor }}}#{{{ else }}}{config.relative_path}/topic/{./slug}{{{ if ./bookmark }}}/{./bookmark}{{{ end }}}{{{ end }}}">{./title}</a>
 				</h3>
+				
 				<div>
 					<p>{./content}</p>
 				</div>
@@ -145,6 +135,22 @@
 				</div>
 			</div>
 		</div>
+			
+	{{{ if (./title != "[[topic:topic-is-deleted]]")}}}
+		<div class = 'd-flex '>
+				<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
+					{{{ if ./solved}}}
+						<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
+							<span > Solved </span>
+						</div>
+					{{{ else }}}
+						<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
+							<span>Unsolved</span>
+						</div>
+					{{{	end }}}
+				</div>
+		</div>
+	{{{ end }}}
 	</li>
 	{{{end}}}
 </ul>
