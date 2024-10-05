@@ -38,7 +38,7 @@
 
 			<div class="d-flex gap-1 align-items-center">
 				<span class="text-muted">{generateWroteReplied(@value, config.timeagoCutoff)}</span>
-
+				
 				<i component="post/edit-indicator" class="fa fa-edit text-muted{{{ if privileges.posts:history }}} pointer{{{ end }}} edit-icon {{{ if !posts.editor.username }}}hidden{{{ end }}}" title="[[global:edited-timestamp, {isoTimeToLocaleString(./editedISO, config.userLang)}]]"></i>
 				<span data-editor="{posts.editor.userslug}" component="post/editor" class="visually-hidden">[[global:last-edited-by, {posts.editor.username}]] <span class="timeago" title="{isoTimeToLocaleString(posts.editedISO, config.userLang)}"></span></span>
 			</div>
@@ -62,6 +62,15 @@
 		<div class="content mt-2 text-break" component="post/content" itemprop="text">
 			{posts.content}
 		</div>
+
+		
+		<div component = "topic/post/endorse-message" >
+			{{{ if ./endorsed }}}
+				<span class = "badge bg-primary"> This reply is endorsed by an INSTRUCTOR </span>
+			{{{ end }}}
+		</div>
+		
+
 	</div>
 </div>
 
@@ -94,8 +103,19 @@
 
 	<div component="post/actions" class="d-flex justify-content-end gap-1 post-tools">
 		<!-- IMPORT partials/topic/reactions.tpl -->
+		<div class = 'd-flex'>
+			{{{ if !./endorsed }}}
+					<div component = "topic/post/endorse" class = "pe-auto d-flex" p-2 card card-title align-items-center rounded-1">
+							<div class = "card card-header bg-primary text-light font-weight-bold rounded-1">
+								<span > Endorse </span>
+							</div>
+					</div>
+			{{{ end }}}
+		</div>
 		<a component="post/reply" href="#" class="btn-ghost-sm {{{ if !privileges.topics:reply }}}hidden{{{ end }}}" title="[[topic:reply]]"><i class="fa fa-fw fa-reply text-primary"></i></a>
 		<a component="post/quote" href="#" class="btn-ghost-sm {{{ if !privileges.topics:reply }}}hidden{{{ end }}}" title="[[topic:quote]]"><i class="fa fa-fw fa-quote-right text-primary"></i></a>
+		
+
 
 		{{{ if !reputation:disabled }}}
 		<div class="d-flex votes align-items-center">
