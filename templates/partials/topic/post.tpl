@@ -104,7 +104,7 @@
 	<div component="post/actions" class="d-flex justify-content-end gap-1 post-tools">
 		<!-- IMPORT partials/topic/reactions.tpl -->
 		<div class = 'd-flex'>
-			{{{ if !./endorsed }}}
+			{{{ if (!./endorsed && (./index != 0)) }}}
 					<div component = "topic/post/endorse" class = "pe-auto d-flex" p-2 card card-title align-items-center rounded-1">
 							<div class = "card card-header bg-primary text-light font-weight-bold rounded-1">
 								<span > Endorse </span>
