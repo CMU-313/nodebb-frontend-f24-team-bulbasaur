@@ -23,10 +23,28 @@
 
 	<div class="d-flex flex-column gap-3">
 		<div class="d-flex flex-wrap">
-			<div class="d-flex flex-column gap-3 flex-grow-1">
-				<h1 component="post/header" class="tracking-tight fw-semibold fs-3 mb-0 text-break {{{ if config.theme.centerHeaderElements }}}text-center{{{ end }}}">
+			<div class="d-flex flex-column gap-3 flex-grow-1 gap-3 ">
+			
+			<div class = "d-flex justify-content-between">
+				<h1 component="post/header" class="d-flex align-items-end tracking-tight fw-semibold fs-3 mb-0 text-break {{{ if config.theme.centerHeaderElements }}}text-center{{{ end }}}">
 					<span class="topic-title" component="topic/title">{title}</span>
 				</h1>
+				<div component = "topic/solve" class = "d-flex" p-2 card card-title align-items-center rounded-1">
+					
+					{{{ if ./solved}}}
+						<div class = "card card-header bg-success text-light font-weight-bold rounded-1">
+							<span > Solved </span>
+						</div>
+					{{{ else }}}
+						<div class = "card card-header bg-danger text-light font-weight-bold rounded-1">
+							<span>Unsolved</span>
+						</div>
+					{{{	end }}}
+
+				</div>
+				
+			</div>
+				
 
 				<div class="topic-info d-flex gap-2 align-items-center flex-wrap {{{ if config.theme.centerHeaderElements }}}justify-content-center{{{ end }}}">
 					<span component="topic/labels" class="d-flex gap-2 {{{ if (!scheduled && (!pinned && (!locked && (!oldCid && !icons.length)))) }}}hidden{{{ end }}}">
@@ -64,7 +82,6 @@
 				{{{ if !scheduled }}}
 				<!-- IMPORT partials/topic/deleted-message.tpl -->
 				{{{ end }}}
-
 				<div class="d-flex gap-0 gap-lg-5">
 					<div class="posts-container" style="min-width: 0;">
 						<ul component="topic" class="posts timeline list-unstyled mt-sm-2 p-0 py-3" style="min-width: 0;" data-tid="{tid}" data-cid="{cid}">
