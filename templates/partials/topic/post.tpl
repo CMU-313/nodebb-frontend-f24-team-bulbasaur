@@ -61,8 +61,7 @@
 
 		<div class="content mt-2 text-break" component="post/content" itemprop="text">
 			{posts.content}
-		</div>
-
+		
 		{{{if !posts.isEnglish }}}
 			<div class="sensitive-content-message">
 			<a class="btn btn-sm btn-primary view-translated-btn">Click here to view the translated message.</a>
@@ -72,13 +71,13 @@
 			</div>
 	    {{{end}}}
 
+		</div>
+
 		<div component = "topic/post/endorse-message" >
 			{{{ if ./endorsed }}}
 				<span class = "badge bg-primary"> This reply is endorsed by an INSTRUCTOR </span>
 			{{{ end }}}
 		</div>
-		
-
 	</div>
 </div>
 
